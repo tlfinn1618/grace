@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import GracePointLogo from "../../images/header/graceLogo.svg";
 import NavigationComponent from "../navigation/navigation";
 import GIDLogo from "./logo";
 

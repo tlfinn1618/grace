@@ -1,52 +1,52 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 export default class NavigationComponent extends Component {
   render() {
     return (
       <div className="navBar-wrapper">
-        <Link
+        <NavLink
           to="/home"
           className="nav-btn"
         >
           Home
-        </Link>
-        <Link
+        </NavLink>
+        <NavLink
           to="/worship"
           className="nav-btn"
         >
           Worship
-        </Link>
-        <Link
+        </NavLink>
+        <NavLink
           to="/about"
           className="nav-btn"
         >
           About
-        </Link>
-        <Link
+        </NavLink>
+        <NavLink
           to="/events"
           className="nav-btn"
         >
           Events
-        </Link>
-        <Link
+        </NavLink>
+        <NavLink
           to="/giving"
           className="nav-btn"
         >
           Giving
-        </Link>
-        <Link
+        </NavLink>
+        <NavLink
           to="/prayers"
           className="nav-btn"
         >
           Prayers
-        </Link>
-        <Link
+        </NavLink>
+        <NavLink
           to="/ministries"
           className="nav-btn"
         >
           Ministries
-        </Link>
+        </NavLink>
       </div>
     );
   }

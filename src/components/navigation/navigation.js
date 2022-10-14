@@ -24,12 +24,6 @@ export default class NavigationComponent extends Component {
           About
         </NavLink>
         <NavLink
-          to="/events"
-          className="nav-btn"
-        >
-          Events
-        </NavLink>
-        <NavLink
           to="/giving"
           className="nav-btn"
         >

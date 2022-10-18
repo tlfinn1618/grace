@@ -6,4 +6,20 @@
   justify-content: center;
   align-items: center;
   font-size: 1.2em;
+  
+  .navBar-left {
+    display: flex;
+    
+    .nav-btn {
+      text-decoration: none;
+      color: black;
+      padding: 5px 10px;
+      transition: 500ms;
+      
+      &:hover {
+        color: white;
+        background-color: gray;
+      }
+    }
+  }
 }

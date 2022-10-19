@@ -1,25 +1,25 @@
 .main-container {
-    display: flex;
-    padding: 10px;
-    
-    .main-content {
-        diplay: flex;
-   
-        .main-content-left {
-            display: grid;
-       
-            .main-content-heading {
-                font-size: 1.5rem;
-                font-weight: 700;
-            }
-            .main-content-text {
-                font-size: 1.1rem;
-            }
-        }
-        
-        .main-content-right {
-            font-size: 0.9rem;
-        }
-    }
-}
+  display: flex;
+  padding: 10px;
 
+  .main-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+
+    .main-content-left {
+      display: grid;
+
+      .main-content-heading {
+        font-size: 1.5rem;
+        font-weight: 700;
+      }
+      .main-content-text {
+        font-size: 1.1rem;
+      }
+    }
+
+    .main-content-right {
+      font-size: 0.9rem;
+    }
+  }
+}

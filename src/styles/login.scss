@@ -1,0 +1,38 @@
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .login-card {
+    display: flex;
+    width: 250px;
+    height: 300px;
+    padding: 10px;
+    box-shadow: 4px 5px 10px 5px rgb(0 0 0 / 40%);
+    border-radius: 10px;
+    margin: 20px 0px;
+    .login-card-content {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      .login-heading {
+        font-family: "Futura", sans-serif;
+        font-size: 0.8em;
+        font-weight: 700;
+        margin: 20px 0px;
+      }
+      .login-form-wrapper {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-gap: 15px;
+
+        .login-form-group {
+          @include input-element();
+          input {
+            margin-bottom: 0px;
+          }
+        }
+      }
+    }
+  }
+}

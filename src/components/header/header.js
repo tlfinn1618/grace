@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { useLocation } from "react-router-dom";
+// import { useLocation } from "react-router-dom";
 
 import NavigationComponent from "../navigation/navigation";
 import GIDLogo from "./logo";

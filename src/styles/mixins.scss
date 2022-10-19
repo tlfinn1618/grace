@@ -1,0 +1,22 @@
+@mixin input-element {
+  input {
+    font-family: "Futura", sans-serif;
+    color: $blue-med;
+    padding: 5px 3px;
+    width: 100%;
+    border-top: 0px;
+    border-right: 0px;
+    border-left: 0px;
+    border-bottom: 1px solid $blue-lt;
+    background-color: transparent;
+    transition: 500ms;
+    font-size: 1.1em;
+    margin-bottom: 21px;
+
+    &:focus {
+      outline: none;
+      border-bottom: 1px solid $orange-dk;
+      box-shadow: 2px 2px 5px 1px rgb(0 0 0 / 40%);
+    }
+  }
+}

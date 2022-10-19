@@ -1,0 +1,19 @@
+.btn {
+  cursor: pointer;
+  font-size: 1.1em;
+  font-weight: 500;
+  border: 1px solid transparent;
+  transition: all 500ms ease-in-out;
+  background-color: $blue-lt;
+  width: 100%;
+  color: whitesmoke;
+
+  &:active,
+  &:focus {
+    outline: none;
+  }
+
+  &:hover {
+    background-color: $blue-dk;
+  }
+}

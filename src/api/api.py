@@ -54,6 +54,8 @@ devotional_table = Table(
     Column("text", String),
 )
 
+user_info_join = join(user_table, user_info_table, devotional_table)
+
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)

@@ -48,3 +48,13 @@ class Newsletter(db.Model):
 
     def __repr__(self) -> str:
         return f'<Newsletter "{self.title}">'
+
+
+class Bulletin(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String)
+    content = db.Column(db.String)
+    date = db.Column(db.Date)
+
+    def __repr__(self) -> str:
+        return f'<Bulletin "{self.title}">'

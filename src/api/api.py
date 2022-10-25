@@ -1,60 +1,15 @@
-from sqlite3 import Date
-from tokenize import String
 from flask import Flask, request, jsonify
-
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
 import os
-
-from sqlalchemy import Table, Column, Integer, String, MetaData, join, ForeignKey
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import column_property
 
 app = Flask(__name__)
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + \
-    os.path.join(basedir, 'grace.sqlite')
+    os.path.join(basedir, 'gracebase.sqlite')
 db = SQLAlchemy(app)
 ma = Marshmallow(app)
-
-metadata_obj = MetaData()
-
-user_table = Table(
-    "user",
-    metadata_obj,
-    Column("id", Integer, primary_key=True),
-    Column("email", String),
-    Column("password", String),
-    Column("first_name", String),
-    Column("last_name", String),
-    Column("user_title", String)
-)
-
-user_info_table = Table(
-    "info",
-    metadata_obj,
-    Column("id", Integer, primary_key=True),
-    Column("user_id", Integer, ForeignKey("user.id")),
-    Column("street_address", String),
-    Column("street_address_two", String),
-    Column("city", String),
-    Column("state", String),
-    Column("postal_code", Integer),
-    Column("phone", String)
-)
-
-devotional_table = Table(
-    "devotional",
-    metadata_obj,
-    Column("id", Integer, primary_key=True),
-    Column("user_id", Integer, ForeignKey("user.id")),
-    Column("date", Date),
-    Column("title", String),
-    Column("text", String),
-)
-
-user_info_join = join(user_table, user_info_table, devotional_table)
 
 
 class User(db.Model):

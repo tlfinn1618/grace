@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
+import requests
 import os
 
 app = Flask(__name__)
@@ -32,14 +33,34 @@ class User(db.Model):
         self.mobile = mobile
 
 
+class News(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String)
+    text = db.Column(db.String)
+    date = db.Column(db.Date)
+
+    def __init__(self, title, text, date):
+        self.title = title
+        self.text = text
+        self.date = date
+
+
 class UserSchema(ma.Schema):
     class Meta:
         fields = ('username', 'password', 'first_name',
                   'last_name', 'user_title', 'email', 'mobile')
 
 
+class NewsSchema(ma.Schema):
+    class Meta:
+        fields = ('title', 'text', 'date')
+
+
 user_schema = UserSchema()
 users_schema = UserSchema(many=True)
+
+news_schema = NewsSchema()
+all_news_schema = NewsSchema(many=True)
 
 # Endpoint to create a new user
 

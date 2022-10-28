@@ -10,18 +10,25 @@
   .navBar-left {
     display: flex;
     width: 80vw;
+    height: 30px;
     justify-content: space-around;
 
     .nav-btn {
       text-decoration: none;
-      color: black;
-      padding: 5px 10px;
+      color: $blue-dk;
+      padding: 5px 15px;
       transition: 500ms;
 
       &:hover {
-        color: white;
-        background-color: gray;
+        color: $blue-med;
       }
+
+      &:active {
+        color: white;
+      }
+    }
+    .active {
+      color: $orange-dk;
     }
   }
 }

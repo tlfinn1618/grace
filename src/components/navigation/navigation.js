@@ -3,60 +3,48 @@ import { NavLink } from "react-router-dom";
 
 export default class NavigationComponent extends Component {
   render() {
-    let activeStyle = {
-      textDecoration: "none",
-      color: "white",
-      backgroundColor: "gray",
-      padding: "5px 10px",
-    };
-
-    let navBtn = {
-      textDecoration: "none",
-      color: "black",
-      padding: "5px 10px",
-      transition: "500ms",
-    };
+    let className = "nav-btn";
 
     return (
       <div className="navBar-wrapper">
         <div className="navBar-left">
           <NavLink
-            style={({ isActive }) => (isActive ? activeStyle : navBtn)}
+            className={className}
             end
             to="/"
           >
             Home
           </NavLink>
           <NavLink
-            style={({ isActive }) => (isActive ? activeStyle : navBtn)}
+            className={className}
             end
             to="/worship"
           >
             Worship
           </NavLink>
           <NavLink
-            style={({ isActive }) => (isActive ? activeStyle : navBtn)}
+            className={className}
             end
             to="/about"
           >
             About
           </NavLink>
           <NavLink
-            style={({ isActive }) => (isActive ? activeStyle : navBtn)}
+            className={className}
             end
             to="/giving"
           >
             Giving
           </NavLink>
           <NavLink
-            style={({ isActive }) => (isActive ? activeStyle : navBtn)}
+            className={className}
             end
             to="/prayers"
           >
             Prayers
           </NavLink>
           <NavLink
-            style={({ isActive }) => (isActive ? activeStyle : navBtn)}
+            className={className}
             end
             to="/ministries"
           >

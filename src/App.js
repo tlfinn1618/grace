@@ -11,6 +11,7 @@ import Worship from "./components/pages/worship";
 import Auth from "./components/pages/auth";
 import "./styles/main.scss";
 import Icons from "./components/helpers/icons";
+import Dashboard from "./components/pages/dashboard";
 
 export default class App extends Component {
   constructor(props) {
@@ -55,6 +56,11 @@ export default class App extends Component {
               <Route
                 path="/auth"
                 element={<Auth />}
+              />
+
+              <Route
+                path="/dashboard"
+                element={<Dashboard />}
               />
 
               <Route

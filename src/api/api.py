@@ -1,8 +1,12 @@
 from flask import Flask, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import Column, ForeignKey, Integer, Table
+from sqlalchemy.orm import declarative_base, relationship
 from flask_marshmallow import Marshmallow
 import requests
 import os
+
+Base = declarative_base()
 
 app = Flask(__name__)
 
@@ -17,15 +21,22 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(30), unique=True)
     password = db.Column(db.String(30))
+
+    def __init__(self, username, password):
+        self.username = username
+        self.password = password
+
+
+class UserInfo(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, ForeignKey=("User.id"))
     first_name = db.Column(db.String(30))
     last_name = db.Column(db.String(30))
     user_title = db.Column(db.String(30))
     email = db.Column(db.String(255))
     mobile = db.Column(db.String(10))
 
-    def __init__(self, username, password, first_name, last_name, user_title, email, mobile):
-        self.username = username
-        self.password = password
+    def __init__(self, first_name, last_name, user_title, email, mobile):
         self.first_name = first_name
         self.last_name = last_name
         self.user_title = user_title
@@ -47,8 +58,12 @@ class News(db.Model):
 
 class UserSchema(ma.Schema):
     class Meta:
-        fields = ('username', 'password', 'first_name',
-                  'last_name', 'user_title', 'email', 'mobile')
+        fields = ('username', 'password')
+
+
+class UserInfoSchema(ma.Schema):
+    class Meta:
+        fields = ('first_name', 'last_name', 'user_title', 'email', 'mobile')
 
 
 class NewsSchema(ma.Schema):
@@ -58,6 +73,8 @@ class NewsSchema(ma.Schema):
 
 user_schema = UserSchema()
 users_schema = UserSchema(many=True)
+
+user_info_schema = UserInfoSchema()
 
 news_schema = NewsSchema()
 all_news_schema = NewsSchema(many=True)
@@ -69,14 +86,7 @@ all_news_schema = NewsSchema(many=True)
 def add_user():
     username = request.json['username']
     password = request.json['password']
-    first_name = request.json['first_name']
-    last_name = request.json['last_name']
-    user_title = request.json['user_title']
-    email = request.json['email']
-    mobile = request.json['mobile']
-
-    new_user = User(username, password, first_name,
-                    last_name, user_title, email, mobile)
+    new_user = User(username, password)
     db.session.add(new_user)
     db.session.commit()
 

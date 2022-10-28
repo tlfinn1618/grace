@@ -25,7 +25,7 @@ class User(db.Model):
     users_info = db.relationship('UserInfo', backref='user')
 
     def __repr__(self):
-        return f'<User "{self.first_name + " " + self.last_name}"'
+        return f'<User "{self.first_name + " " + self.last_name}">'
 
 
 class UserInfo(db.Model):

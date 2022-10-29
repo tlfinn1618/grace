@@ -1,0 +1,40 @@
+.worship-container {
+  display: grid;
+  grid-template-columns: 1fr 4fr 1fr;
+  grid-gap: 15px;
+
+  .worship-times-container {
+    display: grid;
+    margin: 15px;
+
+    .worship-times-card {
+      display: grid;
+      justify-content: center;
+      border: 1px solid grey;
+      border-radius: 10px;
+      padding: 5px;
+      box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.3);
+
+      .worship-time-title {
+        font-size: 1.25em;
+        font-weight: 600;
+        width: 100%;
+        justify-items: center;
+        align-items: center;
+      }
+    }
+    .worship-location-card {
+      display: grid;
+      justify-content: center;
+      border: 1px solid grey;
+      border-radius: 10px;
+
+      padding: 5px;
+      box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.3);
+    }
+  }
+  .worship-video-container {
+    display: grid;
+    justify-content: center;
+  }
+}

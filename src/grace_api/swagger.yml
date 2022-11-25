@@ -1,0 +1,114 @@
+openapi: 3.0.0
+info:
+  title: "Grace Flask REST API"
+  description: "An API for Users to store and utilize database information."
+  version: "1.0.0"
+
+servers:
+  - url: "/api"
+
+components:
+  schemas:
+    User:
+      type: "object"
+      required:
+        - fname
+        - lname
+        - email
+        - password
+      properties:
+        fname:
+          type: "string"
+        lname:
+          type: "string"
+        email:
+          type: "string"
+        password:
+          type: "string"
+
+  parameters:
+    fname:
+      name: "fname"
+      description: "User's first name"
+      in: path
+      required: True
+      schema:
+        type: "string"
+    lname:
+      name: "lname"
+      description: "User's last name"
+      in: path
+      required: True
+      schema:
+        type: "string"
+
+paths:
+  /users:
+    get:
+      operationId: "users.read_all"
+      tags:
+        - "Users"
+      summary: "Read the list of users"
+      responses:
+        "200":
+          description: "Successfully read the list of users"
+
+    post:
+      operationId: "users.create"
+      tags:
+        - Users
+      summary: "Create a new user"
+      requestBody:
+        description: "User to create"
+        required: True
+        content:
+          application/json:
+            schema:
+              x-body-name: "user"
+              $ref: "#/components/schemas/User"
+      responses:
+        "201":
+          description: "Successfully created a new user"
+
+  /users/lname:
+    get:
+      operationId: "users.read_one"
+      tags:
+        - Users
+      summary: "Read one person"
+      parameters:
+        - $ref: "#/components/parameters/fname"
+        - $ref: "#/components/parameters/lname"
+      responses:
+        "200":
+          description: "Successfully read user"
+
+    put:
+      tags:
+        - Users
+      operationId: "users.update"
+      summary: "Update a user"
+      parameters:
+        - $ref: "#/components/parameters/fname"
+        - $ref: "#/components/parameters/lname"
+      responses:
+        "200":
+          description: "Successfully updated user"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              x-body-name: "user"
+              $ref: "#/components/schemas/User"
+
+    delete:
+      tags:
+        - Users
+      operationId: "users.delete"
+      summary: "Delete a user"
+      parameters:
+        - $ref: "#/components/parameters/fname"
+        - $ref: "#/components/parameters/lname"
+      responses:
+        "200":
+          description: "Successfully deleted user"

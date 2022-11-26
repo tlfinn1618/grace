@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
-  title: "Grace Flask REST API"
-  description: "An API for Users to store and utilize database information."
+  title: "Grace API"
+  description: "A REST API for Users to store and utilize database information."
   version: "1.0.0"
 
 servers:
@@ -9,22 +9,61 @@ servers:
 
 components:
   schemas:
-    User:
+    Church:
       type: "object"
       required:
-        - fname
-        - lname
+        - churchId
+        - churchName
+        - churchPhone
+        - churchLocation
+      properties:
+        churchId:
+          type: integer
+          example: 1
+        churchName:
+          type: string
+          example: Grace in the Desert
+        churchPhone:
+          type: string
+          example: 123-456-7890
+        churchLocation:
+          type: string
+          example: https://goo.gl/maps/kgbHCRVMULdtATzF7
+
+    Members:
+      type: "object"
+      required:
+        - memberId
+        - churchId
+        - firstName
+        - lastName
         - email
         - password
+        - mobile
+        - emailList
+        - prayerList
+        - position
       properties:
-        fname:
-          type: "string"
-        lname:
-          type: "string"
+        memberId:
+          type: integer
+        churchId:
+          type: integer
+        firstName:
+          type: String
+        lastName:
+          type: String
         email:
-          type: "string"
+          type: email
         password:
-          type: "string"
+          type: password
+        mobile:
+          type: int
+        emailList:
+          type: true
+        prayerList:
+          type: true
+        position:
+          type: String
 
   parameters:
     fname:

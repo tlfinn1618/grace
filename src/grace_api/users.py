@@ -6,21 +6,33 @@ from flask import abort, make_response
 def get_timestamp():
     return datetime.now().strftime(("%Y-%m-%d %H:%M:%S"))
 
-USERS = {
-    "Finn": {
-        "fname": "Thomas",
-        "lname": "Finn",
-        "timestamp": get_timestamp(),
+CHURCHES = {
+    "GID": {
+        "id": "1",
+        "name": "Grace in the Desert Adventist Church",
+        "phone": "123-456-7890",
+        "address": "1234 N Some St",
+        "city": "Peoria",
+        "state": "Arizona",
+        "zip": "12345",
     },
-    "Webster": {
-        "fname": "Greg",
-        "lname": "Webster",
-        "timestamp": get_timestamp(),
+    "GID2": {
+        "id": "2",
+        "name": "Grace in the Desert Adventist Church2",
+        "phone": "234-567-8901",
+        "address": "1334 N Some St",
+        "city": "Sun City",
+        "state": "Arizona",
+        "zip": "23456",
     },
-    "Morada": {
-        "fname": "Glady Mae",
-        "lname": "Finn",
-        "timestamp": get_timestamp(),
+    "GID3": {
+        "id": "3",
+        "name": "Grace in the Desert Adventist Church3",
+        "phone": "987-654-3210",
+        "address": "12234 N Some St",
+        "city": "Glendale",
+        "state": "Arizona",
+        "zip": "98756",
     }
 }
 

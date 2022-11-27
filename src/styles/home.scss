@@ -4,9 +4,9 @@
 
   .main-content {
     display: grid;
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: 1fr 2fr 1fr;
 
-    .main-content-left {
+    .main-content-center {
       display: grid;
 
       .main-content-heading {

@@ -4,7 +4,8 @@ export default function Home() {
   return (
     <div className="main-container">
       <div className="main-content">
-        <div className="main-content-left">
+        <div className="main-content-left"></div>
+        <div className="main-content-center">
           <div className="main-content-heading">Who are we?</div>
           <div className="main-content-text">
             We are your neighbors who want only to make sure that you do not

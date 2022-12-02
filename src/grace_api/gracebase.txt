@@ -1,0 +1,180 @@
+Planning an Grace API
+
+TABLE: CHURCH
+	*churchid: INT, unique: True, primary Key: True
+	*churchName: String
+	*phone: int
+	*location: String
+
+>>> import sqlite3
+>>> conn = sqlite3.connect("grace.db")
+>>> columns = [
+...     "id INTEGER PRIMARY KEY",
+...     "name VARCHAR UNIQUE",
+...     "phone VARCHAR",
+...     "address1 VARCHAR",
+...     "address2 VARCHAR",
+...     "city VARCHAR",
+...     "state VARCHAR",
+...     "zip VARCHAR",
+...     "timestamp DATETIME",
+... ]
+>>> create_table_cmd = f"CREATE TABLE church ({','.join(columns)})"
+>>> conn.execute(create_table_cmd)
+<sqlite3.Cursor object at 0x1063f4dc0>
+
+
+>>> import sqlite3
+>>> conn = sqlite3.connect("grace.db")
+>>> church = [
+...     "1, 'Grace in the Desert', '123-456-7890', '123 Some St.', '', 'Peoria', 'AZ', '12345', '2022-10-08 09:15:10'",
+...     "2, 'Grace in the Desert - Latino', '123-456-7890', '123 Some St.', '', 'Peoria', 'AZ', '12345', '2022-10-08 09:15:10'",
+...     "3, 'Grace in the Desert - Laotian', '123-456-7890', '123 Some St.', '', 'Peoria', 'AZ', '12345', '2022-10-08 09:15:10'",
+... ]
+>>> for church_data in church:
+...     insert_cmd = f"INSERT INTO church VALUES ({church_data})"
+...     conn.execute(insert_cmd)
+...
+<sqlite3.Cursor object at 0x104ac4dc0>
+<sqlite3.Cursor object at 0x104ac4f40>
+<sqlite3.Cursor object at 0x104ac4fc0>
+
+>>> conn.commit()
+
+# Interact with database to select all 
+>>> import sqlite3
+>>> conn = sqlite3.connect("grace.db")
+>>> cur = conn.cursor()
+>>> cur.execute("SELECT * FROM church")
+<sqlite3.Cursor object at 0x102357a40>
+
+>>> churches = cur.fetchall()
+>>> for church in churches:
+...     print(church)
+...
+
+# Interact with database to select one 
+>>> import sqlite3
+>>> conn = sqlite3.connect("grace.db")
+>>> cur = conn.cursor()
+>>> name = "Grace in the Desert"
+>>> cur.execute("SELECT * FROM church WHERE name = '{name}'")
+<sqlite3.Cursor object at 0x102357a40>
+
+>>> churches = cur.fetchall()
+>>> for church in churches:
+...     print(church)
+...
+
+
+TABLE: MEMBERS
+	*memberid: INT, unique: True, primary Key: True
+	*churchid: foreignKey
+	*firstName: String
+	*lastName: String
+	*email: String
+	*password: String
+	*mobile: int
+	*emailList: Boolean
+	*prayerList: Boolean
+	position: String (default to member, hidden to member, changed by Admin)
+
+Action		HTTP Verb	URL Path					Description
+
+Read 		GET			/api/users					Read a list of users
+Create		POST		/api/user						Create a new user
+Read		GET			/api/user/<username> 			Reads user information
+Update		PUT			/api/user/<username> 			Update user information
+Delete		DELETE		/api/user/<username> 			Delete a user
+
+TABLE: BLOG
+	id: INT, unique: True, primary Key: True
+	churchid: foreignKey
+	author: String
+	title: String
+	text: String
+	keywords: String
+	date: date
+
+Read		GET			/api/posts					Read a list of newsletters
+Create		POST		/api/post						Create a new newsletter
+Read		GET			/api/post/<postId>				Reads an existing post
+Update 		PUT			/api/post/<postId>				Updates an existing Post
+Delete 		DELETE		/api/post/<postId>				Delete the Post
+
+TABLE: BULLETINS
+	id: INT, unique: True, primary Key: True
+	churchid: foreignKey
+	author: String
+	date: date
+	text: String
+
+Read		GET			/api/bulletins					Read a list of newsletters
+Create		POST		/api/bulletin					Create a new newsletter
+Read		GET			/api/bulletin/<bulletinID>		Reads an existing post
+Update 		PUT			/api/bulletin/<bulletinID>		Updates an existing Post
+Delete 		DELETE		/api/bulletin/<bulletinID>		Delete the Post
+
+TABLE: EVENTS
+	id: INT, unique: True, primary Key: True
+	churchid: foreignKey
+	author: String
+	date: date
+	text: String
+	location: String
+
+Read		GET			/api/events					Read a list of events
+Create		POST		/api/events					Create a new event
+Read		GET			/api/events/<eventsID>			Reads an existing event
+Update 		PUT			/api/events/<eventsID>			Updates an existing event
+Delete 		DELETE		/api/events/<eventsID>			Delete the event
+
+TABLE: MINISTRIES
+	id: INT, unique: True, primary Key: True
+	churchid: foreignKey
+	addedBy: String
+	title: String
+	description: String
+	location: String
+
+Read		GET			/api/ministries					Read a list of ministry
+Create		POST		/api/ministries					Create a new ministry
+Read		GET			/api/ministries/<ministryID>			Reads an existing ministry
+Update 		PUT			/api/ministries/<ministryID>			Updates an existing ministry
+Delete 		DELETE		/api/ministries/<ministryID>			Delete the ministry
+
+TABLE: PRAYERS (anonymous, email for all users)
+	id: INT, unique: True, primary Key: True
+	date: date
+	text: String
+
+Read		GET			/api/prayers					Read a list of prayers
+Create		POST		/api/prayers					Create a new prayer
+Read		GET			/api/prayers/<bulletinID>		Reads an existing prayer
+Delete 		DELETE		/api/prayers/<bulletinID>		Delete the prayer
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

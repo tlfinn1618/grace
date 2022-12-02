@@ -41,6 +41,16 @@ TABLE: CHURCH
 
 >>> conn.commit()
 
+# Get array of all column headers
+>>> import sqlite3
+>>> conn = sqlite3.connect("grace.db")
+>>> cur = conn.cursor()
+>>> cur.execute("SELECT * FROM church")
+>>> headings = list(map(lambda x: x[0], cur.description))
+>>> conn.close()
+>>> print(headings)
+
+
 # Interact with database to select all 
 >>> import sqlite3
 >>> conn = sqlite3.connect("grace.db")

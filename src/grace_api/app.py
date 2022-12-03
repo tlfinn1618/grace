@@ -7,8 +7,8 @@ app.add_api(config.basedir / "swagger.yml")
 
 @app.route("/")
 def home():
-    church = Church.query.all()
-    return render_template("home.html", church=church)
+    churches = Church.query.all()
+    return render_template("home.html", churches=churches)
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8000, debug=True)

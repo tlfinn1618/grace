@@ -7,11 +7,10 @@
     <title>RP Flask REST API</title>
   </head>
   <body>
-    <h1>Hello, Church!</h1>
-
+    <h1>Hello, People!</h1>
     <ul>
       {% for church in churches %}
-      <li>{{ church.name }} {{ church.phone }}</li>
+      <li>{{ church.name }}</li>
       {% endfor %}
     </ul>
   </body>

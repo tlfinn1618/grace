@@ -20,13 +20,13 @@ with app.app_context():
     db.drop_all()
     db.create_all()
     for data in CHURCH_MEMBER:
-        new_church_member = Church(churchId=data.get("id"))
+        new_church_member = Church(name=data.get("name"))
         for content, timestamp in data.get("members", []):
-            new_member.member.append(
+            new_church_member.member.append(
                 Member(
                     content=content,
                     timestamp=datetime.strptime(timestamp, "%Y-%m-%d %H:%M:%S"),
                 )
             )
-        db.session.add(new_person)
+        db.session.add(new_church_member)
     db.session.commit()

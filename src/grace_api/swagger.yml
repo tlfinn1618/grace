@@ -7,6 +7,34 @@ info:
 servers:
   - url: "/api"
 
+components:
+  schemas:
+    Member:
+      type: "object"
+      required:
+        - email
+        - password
+        - firstName
+        - lastName
+      properties:
+        email:
+          type: "string"
+        password:
+          type: "string"
+        firstName:
+          type: "string"
+        lastName:
+          type: "string"
+
+  parameters:
+    lastName:
+      name: "lastName"
+      description: "Last name of the person to get"
+      in: path
+      required: True
+      schema:
+        type: "string"
+
 paths:
   /members:
     get:
@@ -17,3 +45,32 @@ paths:
       responses:
         "200":
           description: "You have succefully retrieved a list of members"
+
+    post:
+      operationId: "members.create"
+      tags:
+        - "Members"
+      summary: "Create a new member"
+      requestBody:
+        description: "Person to create"
+        required: True
+        content:
+          application/json:
+            schema:
+              x-body-name: "member"
+              $ref: "#/components/schemas/Member"
+      responses:
+        "201":
+          description: "Successfully created a new member"
+
+  /members/{lastName}:
+    get:
+      operationId: "members.read_one"
+      tags:
+        - "Members"
+      summary: "Read one person"
+      parameters:
+        - $ref: "#/components/parameters/lastName"
+      responses:
+        "200":
+          description: "Successfully read the person"

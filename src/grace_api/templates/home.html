@@ -9,5 +9,11 @@
   <body>
     <h1>Hello, People!</h1>
     <h2>Check out the new me!</h2>
+
+    <ul>
+      {% for member in members %}
+      <li>{{ member.firstName }} {{ member.lastName }}</li>
+      {% endfor %}
+    </ul>
   </body>
 </html>

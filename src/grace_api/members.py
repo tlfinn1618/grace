@@ -4,23 +4,19 @@ from config import db
 from models import Member, member_schema, members_schema
   
 def read_all():
-    return list(MEMBERS.values())
+    members = Member.query.all()
+    return members_schema.dump(members)
 
 def create(member):
-    email = member.get("email")
-    password = member.get("password")
-    firstName = member.get("firstName")
     lastName = member.get("lastName")
+    firstName = member.get("firstName")
+    existing_member = Member.query.filter(Member.lastName == lastName).one_or_none()
     
-    if lastName and firstName not in MEMBERS:
-        MEMBERS[lastName] = {
-            "email": email,
-            "password": password,
-            "firstName": firstName,
-            "lastName": lastName,
-            "timestamp": get_timestamp(),
-        }
-        return MEMBERS[lastName], 201
+    if existing_member is None:
+        new_member = member_schema.load(member, session=db.session)
+        db.session.add(new_member)
+        db.session.commit()
+        return member_schema.dump(new_member), 201
     else:
         abort(
             406,
@@ -28,18 +24,24 @@ def create(member):
         )
         
 def read_one(lastName):
-    if lastName in MEMBERS:
-        return MEMBERS[lastName]
+    member = Member.query.filter(Member.lastName == lastName).one_or_none()
+    
+    if member is not None:
+        return member_schema.dump(member)
     else:
         abort(
             404, f"Member with last name {lastName} was not found"
         )
         
 def update(lastName, member):
-    if lastName in MEMBERS:
-        MEMBERS[lastName]["firstName"] = member.get("fname", MEMBERS[lastName]["firstName"])
-        MEMBERS[lastName]["timestamp"] = get_timestamp()
-        return MEMBERS[lastName]
+    existing_member = Member.query.filter(Member.lastName == lastName).one_or_none()
+    
+    if existing_member:
+        update_member = member_schema.load(member, session=db.session)
+        existing_member.firstName = update_member.firstName
+        db.session.merge(existing_member)
+        db.session.commit()
+        return member_schema.dump(existing_member), 201
     else:
         abort(
             404,
@@ -47,13 +49,14 @@ def update(lastName, member):
         )  
         
 def delete(lastName):
-    if lastName in MEMBERS:
-        del MEMBERS[lastName]
-        return make_response(
-            f"{lastName} was successfully deleted", 200
-        )
+    existing_member = Member.query.filter(Member.lastName == lastName).one_or_none()
+    
+    if existing_member:
+        db.session.delete(existing_member)
+        db.session.commit()
+        return make_response(f"{lastName} was successfully deleted", 200)
     else:
         abort(
             404,
-            f"Person with last name {lastName} was not found"
+            f"Member with last name {lastName} was not found"
         )

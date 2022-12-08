@@ -15,7 +15,7 @@ class Member(db.Model):
     )
     
 
-class MemberSchema(ma.SQLAchemyAutoSchema):
+class MemberSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
         model = Member
         load_instance = True

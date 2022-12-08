@@ -10,13 +10,10 @@ TABLE: CHURCH
 >>> conn = sqlite3.connect("grace.db")
 >>> columns = [
 ...     "id INTEGER PRIMARY KEY",
-...     "name VARCHAR UNIQUE",
-...     "phone VARCHAR",
-...     "address1 VARCHAR",
-...     "address2 VARCHAR",
-...     "city VARCHAR",
-...     "state VARCHAR",
-...     "zip VARCHAR",
+...     "email VARCHAR",
+...     "password VARCHAR",
+...     "lastName VARCHAR",
+...     "firstName VARCHAR",
 ...     "timestamp DATETIME",
 ... ]
 >>> create_table_cmd = f"CREATE TABLE church ({','.join(columns)})"
@@ -26,13 +23,11 @@ TABLE: CHURCH
 
 >>> import sqlite3
 >>> conn = sqlite3.connect("grace.db")
->>> church = [
-...     "1, 'Grace in the Desert', '123-456-7890', '123 Some St.', '', 'Peoria', 'AZ', '12345', '2022-10-08 09:15:10'",
-...     "2, 'Grace in the Desert - Latino', '123-456-7890', '123 Some St.', '', 'Peoria', 'AZ', '12345', '2022-10-08 09:15:10'",
-...     "3, 'Grace in the Desert - Laotian', '123-456-7890', '123 Some St.', '', 'Peoria', 'AZ', '12345', '2022-10-08 09:15:10'",
+>>> member = [
+...     "1, 'tlfinn1618@gmail.com', 'password', 'Finn', 'Thomas', '2022-10-08 09:15:10'",
 ... ]
->>> for church_data in church:
-...     insert_cmd = f"INSERT INTO church VALUES ({church_data})"
+>>> for member_data in member:
+...     insert_cmd = f"INSERT INTO member VALUES ({member_data})"
 ...     conn.execute(insert_cmd)
 ...
 <sqlite3.Cursor object at 0x104ac4dc0>
@@ -45,7 +40,7 @@ TABLE: CHURCH
 >>> import sqlite3
 >>> conn = sqlite3.connect("grace.db")
 >>> cur = conn.cursor()
->>> cur.execute("SELECT * FROM church")
+>>> cur.execute("SELECT * FROM member")
 >>> headings = list(map(lambda x: x[0], cur.description))
 >>> conn.close()
 >>> print(headings)
@@ -55,12 +50,12 @@ TABLE: CHURCH
 >>> import sqlite3
 >>> conn = sqlite3.connect("grace.db")
 >>> cur = conn.cursor()
->>> cur.execute("SELECT * FROM church")
+>>> cur.execute("SELECT * FROM member")
 <sqlite3.Cursor object at 0x102357a40>
 
->>> churches = cur.fetchall()
->>> for church in churches:
-...     print(church)
+>>> members = cur.fetchall()
+>>> for member in members:
+...     print(member)
 ...
 
 # Interact with database to select one 

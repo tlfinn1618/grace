@@ -49,7 +49,7 @@ paths:
     post:
       operationId: "members.create"
       tags:
-        - "Members"
+        - "Member"
       summary: "Create a new member"
       requestBody:
         description: "Person to create"
@@ -67,10 +67,38 @@ paths:
     get:
       operationId: "members.read_one"
       tags:
-        - "Members"
-      summary: "Read one person"
+        - "Member"
+      summary: "Read one member"
       parameters:
         - $ref: "#/components/parameters/lastName"
       responses:
         "200":
-          description: "Successfully read the person"
+          description: "Successfully read the member information"
+
+    put:
+      tags:
+        - "Member"
+      operationId: "members.update"
+      summary: "Update a member"
+      parameters:
+        - $ref: "#/components/parameters/lastName"
+      responses:
+        "200":
+          description: "Successfully updated the member information"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              x-body-name: "member"
+              $ref: "#/components/schemas/Member"
+
+    delete:
+      tags:
+        - "Member"
+      operationId: "members.delete"
+      summary: "Delete a member"
+      parameters:
+        - $ref: "#/components/parameters/lastName"
+      responses:
+        "204":
+          description: "Successfully deleted them member"

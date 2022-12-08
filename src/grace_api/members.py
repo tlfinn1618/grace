@@ -1,34 +1,8 @@
-from datetime import datetime
-from flask import abort
+from flask import abort, make_response
 
-def get_timestamp():
-    return datetime.now().strftime(("%Y-%m-%d %H:%M:%S"))
-
-
-MEMBERS = {
-    "Fairy": {
-        "firstName": "Tooth",
-        "lastName": "Fairy",
-        "email": "sayAh@somemail.com",
-        "password": "password123",
-        "timestamp": get_timestamp(),
-    },
-    "Ruprecht": {
-        "firstName": "Knecht",
-        "lastName": "Ruprecht",
-        "email": "kramps@somemail.com",
-        "password": "password123",
-        "timestamp": get_timestamp(),
-    },
-    "Bunny": {
-        "firstName": "Peter",
-        "lastName": "Bunny",
-        "email": "hops@somemail.com",
-        "password": "password123",
-        "timestamp": get_timestamp(),
-    }
-}
-    
+from config import db
+from models import Member, member_schema, members_schema
+  
 def read_all():
     return list(MEMBERS.values())
 
@@ -58,8 +32,28 @@ def read_one(lastName):
         return MEMBERS[lastName]
     else:
         abort(
-            404, f"Person with last name {lastName} was not found"
+            404, f"Member with last name {lastName} was not found"
         )
         
+def update(lastName, member):
+    if lastName in MEMBERS:
+        MEMBERS[lastName]["firstName"] = member.get("fname", MEMBERS[lastName]["firstName"])
+        MEMBERS[lastName]["timestamp"] = get_timestamp()
+        return MEMBERS[lastName]
+    else:
+        abort(
+            404,
+            f"Member with last name of {lastName} was not found"
+        )  
         
-        
+def delete(lastName):
+    if lastName in MEMBERS:
+        del MEMBERS[lastName]
+        return make_response(
+            f"{lastName} was successfully deleted", 200
+        )
+    else:
+        abort(
+            404,
+            f"Person with last name {lastName} was not found"
+        )

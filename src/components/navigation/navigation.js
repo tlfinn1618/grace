@@ -50,6 +50,13 @@ export default class NavigationComponent extends Component {
           >
             Ministries
           </NavLink>
+          <NavLink
+            className={className}
+            end
+            to="/dashboard"
+          >
+            Dashboard
+          </NavLink>
         </div>
         <div className="navbar-right">
           {/* Log in status - visible when logged in */}

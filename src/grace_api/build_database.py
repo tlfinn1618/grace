@@ -2,31 +2,34 @@
 
 from datetime import datetime
 from config import app, db
-from models import Church, Member
+from models import Member, Address
 
-CHURCH_MEMBER = [
+MEMBER_ADDRESSES = [
     {
-        "id": "1",
-        "churchId": "1",
-        "email": "tlfinn1618@gmail.com",
-        "password": "Psa23v.1",
-        "firstName": "Thomas",
         "lastName": "Finn",
-        "timestamp": "2022-12-03 20:37:35",
-    },
+        "firstName": "Thomas",
+        "address1": "123 Some St",
+        "address2": "",
+        "city": "Surprise",
+        "state": "AZ",
+        "postCode": "85374",
+    }
 ]
 
 with app.app_context():
     db.drop_all()
     db.create_all()
-    for data in CHURCH_MEMBER:
-        new_church_member = Church(name=data.get("name"))
-        for content, timestamp in data.get("members", []):
-            new_church_member.member.append(
-                Member(
-                    content=content,
-                    timestamp=datetime.strptime(timestamp, "%Y-%m-%d %H:%M:%S"),
+    for data in MEMBER_ADDRESSES:
+        new_member = Member(lastName=data.get("lastName"), firstName=data.get("firstName"))
+        for content in data.get("addresses", []):
+            new_member.addresses.append(
+                Address(
+                    address1=address1,
+                    address2=address2,
+                    city=city,
+                    state=state,
+                    postCode=postCode,
                 )
             )
-        db.session.add(new_church_member)
+        db.session.add(new_member)
     db.session.commit()

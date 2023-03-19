@@ -1,8 +1,14 @@
 import React, { Component } from "react";
+import DashComponents from "../dashboard/dash-components";
+import SideMenu from "../dashboard/db-side-menu";
 
 class Dashboard extends Component {
   render() {
-    return <div>this is dashboard</div>;
+    return (
+      <div>
+        <DashComponents />
+      </div>
+    );
   }
 }
 
